@@ -10,7 +10,10 @@
             "email": "joe@joehallenbeck.com"
         }
     ],
+    "require": {
+        "php": ">=5.3.3"
+    },
     "autoload": {
-        "psr-0": { "Kynda\\DropFramework\\": "src/core/" }
+        "psr-0": { "Kynda\\DropFramework\\": ["src/core/", "src/helpers/", "src/config/"] }
     }
 }
