@@ -1,3 +1,5 @@
-nbproject
-examples
-.idea
+/nbproject
+/examples
+/.idea
+/vendor
+/composer.lock
