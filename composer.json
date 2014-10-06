@@ -1,0 +1,16 @@
+{
+    "name": "JoeHallenbeck/drop-framework",
+    "description": "Yet another PHP micro-framework",
+    "keywords": ["microframework"],
+    "homepage": "http://joehallenbeckc.com/tag/drop-framework/",
+    "license": "GNU General Public License (GPL)",
+    "authors": [
+        {
+            "name": "Joseph Hallenbeck",
+            "email": "joe@joehallenbeck.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Kynda\\DropFramework\\": "src/core/" }
+    }
+}
