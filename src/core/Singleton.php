@@ -1,12 +1,14 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * @version 0.3.0
- * @package Core
+ * @version 0.4.0
+ * @package DropFramework
  * @subpackage Singleton
  * @author Joe Hallenbeck
  * 
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
+
+namespace Kynda\DropFramework;
 
 /**
  * One ring to rule them all, one ring to find them,

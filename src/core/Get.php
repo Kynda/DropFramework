@@ -1,19 +1,22 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * @version 0.3.0
- * @package Core
+ * @version 0.4.0
+ * @package DropFramework
  * @subpackage Request
  * @author Joe Hallenbeck
  * 
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
 
+namespace Kynda\DropFramework;
+
 /**
  * Creates a get request object.
  */
 class Get extends Request {        
     /**
-     * Grabs the get request, alternatively the get request can be overriden with a custom request.
+     * Grabs the get request, alternatively the get request can be overriden 
+     * with a custom request.
      * @param array $request Optional mock request array.
      * @return boolean true on success.
      */

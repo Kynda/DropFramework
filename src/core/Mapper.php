@@ -1,12 +1,15 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * @version 0.3.0
- * @package Core
+ * @version 0.4.0
+ * @package DropFramework
  * @subpackage Mapper
  * @author Joe Hallenbeck
  * 
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
+
+namespace Kynda\DropFramework;
+
 class DomainIntegrityException extends Exception { }
 class TypeException extends Exception { }
 
@@ -176,7 +179,8 @@ class Mapper {
     public function checkDomain( DomainObject $obj ) 
     {
         if ( ! is_a( $obj, $this->targetDomain ) ) { 
-            throw new TypeException( 'Attempted to use ' . get_class($obj) . 'in a ' . get_class( $this ) );
+            throw new TypeException( 'Attempted to use ' . get_class($obj) 
+                    . 'in a ' . get_class( $this ) );
         }
         return true;
     }            

@@ -1,11 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * @version 0.3.0
- * @package Core
+ * @version 0.4.0
+ * @package DropFramework
  * @author Joe Hallenbeck
  * 
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
+
+namespace Kynda\DropFramework;
 
 /**
  * Abstract base class for formatting a domain object pulled from the database.
@@ -18,7 +20,8 @@ abstract class DomainFormatter {
     protected $targetDomain;
     
     /**
-     * The domain formatter object will only format domains of type $targetDomain
+     * The domain formatter object will only format domains of type 
+     * $targetDomain
      * @param type $targetDomain
      */
     public function __construct( $targetDomain )
@@ -39,7 +42,8 @@ abstract class DomainFormatter {
     /**
      * Subclasses must override the format method.
      * 
-     * This method takes a DomainObject of type $targetDomain that has been created by a Mapper object and then
+     * This method takes a DomainObject of type $targetDomain that has been 
+     * created by a Mapper object and then
      * formats that object for use by the application model.
      */
     abstract public function format( DomainObject $obj );

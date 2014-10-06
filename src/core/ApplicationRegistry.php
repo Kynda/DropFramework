@@ -1,8 +1,7 @@
 <?php  
-
 /**
- * @version 0.3.0
- * @package Core
+ * @version 0.4.0
+ * @package DropFramework
  * @subpackage FrameworkRegistry
  * @author Joe Hallenbeck
  * @todo Add Dependency Injection into Framework
@@ -10,29 +9,31 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
 
-/**
- * Global registry of all objects substantiated in application. Needs to require Framework and Request because it runs
- * before Autoload.
- */
-require_once 'FrameworkRegistry.class.php';
-require_once 'Request.class.php';
+namespace Kynda\DropFramework;
 
 /**
- * The ApplicationRegistry loads the configuration and autoload parameters that the application will run off of. This
- * is a essentially a singleton superglobal that contains both itself and it's parent class.
+ * Global registry of all objects substantiated in application. Needs to require 
+ * Framework and Request because it runs before Autoload.
+ *
+ * The ApplicationRegistry loads the configuration and autoload parameters that 
+ * the application will run off of. This is a essentially a singleton 
+ * superglobal that contains both itself and it's parent class.
  * 
- * To initialize the framework you need to require the ApplicationRegistry.class.php and initialize an instance of the
- * ApplicationRegistry by calling:
+ * To initialize the framework you need to require the ApplicationRegistry and 
+ * initialize an instance of the ApplicationRegistry by calling:
  * 
  * ApplicationRegistry::instance( 'ApplicationRegistry' )
  * 
- * This initialization will set up the FrameworkRegistry (using the files in BASEPATH/config) and will store an instance
- * of the FrameworkRegistry in the Registry instances array under the key 'ApplicationRegistry', by immediately calling
- * after this the initApplication method this ApplicationRegistry will load the application specific configurations which
- * will either override the FrameworkRegistry values or instantiate additional configurations. This full registry is
- * then stored in the Registry instances array under the $appName key.
+ * This initialization will set up the FrameworkRegistry (using the files in 
+ * BASEPATH/config) and will store an instance of the FrameworkRegistry in the 
+ * Registry instances array under the key 'ApplicationRegistry', by immediately 
+ * calling after this the initApplication method this ApplicationRegistry will 
+ * load the application specific configurations which will either override the 
+ * FrameworkRegistry values or instantiate additional configurations. This full 
+ * registry is then stored in the Registry instances array under the $appName key.
  * 
- * Pass the fully initialized instance of the ApplictionRegistry to the Router class and the application will begin.
+ * Pass the fully initialized instance of the ApplictionRegistry to the Router 
+ * class and the application will begin.
  */
 class ApplicationRegistry extends FrameworkRegistry
 {
@@ -42,8 +43,10 @@ class ApplicationRegistry extends FrameworkRegistry
     protected function __construct() { }
     
     /**
-     * Overrides Registry magic method. If a request does not exist in the ApplicationRegistry, then this will return
-     * the value from the FrameworkRegistry.
+     * Overrides Registry magic method. If a request does not exist in the 
+     * ApplicationRegistry, then this will return the value from the 
+     * FrameworkRegistry.
+     * 
      * @param string $key Property name
      * @return mixed
      */
@@ -60,6 +63,7 @@ class ApplicationRegistry extends FrameworkRegistry
      * Takes module parameters and loads application configurations that override
      * framework-wide configurations; loads additional autoloaders and the
      * php __autoload function for models. Grabs end-user options from database.
+     * 
      * @param mosParams $params 
      */
     public function initApplication( $appName ) 
@@ -80,15 +84,17 @@ class ApplicationRegistry extends FrameworkRegistry
         // Load application specific helpers and libraries.
         $this->autoLoad( $this->appDir );     
         
-        // Remove ApplicationRegistry from the Registries and replace it with an instance of itself specified by it's 
+        // Remove ApplicationRegistry from the Registries and replace it with an 
+        // instance of itself specified by it's 
         // appName.
 
         return $this->register( $appName );
     }
     
     /**
-     * Clones the ApplicationRegistry and removes ApplicationRegistry from the Registries and replaces it with an 
-     * instance of itself named $appName. (This allows multiple applications to operate at the same time)
+     * Clones the ApplicationRegistry and removes ApplicationRegistry from the 
+     * Registries and replaces it with an instance of itself named $appName. 
+     * (This allows multiple applications to operate at the same time)
      * @param type $appName
      * @return type
      */

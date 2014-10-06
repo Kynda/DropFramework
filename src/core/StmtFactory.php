@@ -1,11 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * @version 0.3.0
- * @package Core
+ * @version 0.4.0
+ * @package DropFramework
  * @author Joe Hallenbeck
  * 
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
+
+namespace Kynda\DropFramework;
 
 /**
  * Abstract base class provides interface for derrived model classes.
@@ -41,7 +43,8 @@ class StmtFactory
     }
     
     /**
-     * Prepares an update statement for a given DomainObject. Exludes frozen fields from update.
+     * Prepares an update statement for a given DomainObject. Exludes frozen 
+     * fields from update.
      * @param PDO $pdo
      * @param type $table
      * @param DomainObject $obj
@@ -74,9 +77,11 @@ class StmtFactory
     }
     
     /**
-     * Returns a prepared select statement built around $args. Possible arguments are:
+     * Returns a prepared select statement built around $args. Possible 
+     * arguments are:
      * 
-     * prepare  =>  A prepared select statement that will override the default select all statement. Otherwise statement
+     * prepare  =>  A prepared select statement that will override the default 
+     *              select all statement. Otherwise statement
      *              will take the form SELECT * FROM $table :where :groupby :orderby :limit
      * orderby  =>  The string component of an ORDER BY
      * where    =>  The string component of a WHERE
@@ -87,8 +92,8 @@ class StmtFactory
      * 
      * @param PDO $pdo
      * @param string $table Table to select from
-     * @param array $args An array of string arguments for modifying the returned statement where 'key' will be replaced
-     * with 'value'.
+     * @param array $args An array of string arguments for modifying the 
+     * returned statement where 'key' will be replaced with 'value'.
      * @return PDOStatement
      */
     public function selectAllStmt( PDO $pdo, $table, $args=null )
@@ -139,8 +144,8 @@ class StmtFactory
     }
     
     /**
-     * This adds a field to the frozenFields array. All fields in the frozenFields array will be excluded from calls to
-     * update the row.
+     * This adds a field to the frozenFields array. All fields in the 
+     * frozenFields array will be excluded from calls to update the row.
      * @param string $field A table field.
      */
     public function freezeUpdate( $field )

@@ -1,17 +1,16 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * @version 0.3.0
- * @package Core
+ * @version 0.4.0
+ * @package DropFramework
  * @subpackage View
  * @author Joe Hallenbeck
  * 
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
 
-class TemplateException extends Exception
-{
-    
-}
+namespace Kynda\DropFramework;
+
+class TemplateException extends Exception {}
 
 /**
  * Handles data for templates.

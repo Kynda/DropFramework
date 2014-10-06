@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 0.3.0
- * @package Core
+ * @version 0.4.0
+ * @package DropFramework
  * @subpackage Router
  * @author Joe Hallenbeck
  * 
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
+
+namespace Kynda\DropFramework;
 
 /**
  * Simple Router
@@ -36,7 +38,8 @@ class Router {
             $controlTrigger = $this->registry->controller_trigger;
             $controller = $request->$controlTrigger;
         } catch (UnsanitaryRequestException $e ) {
-            $request->addResp( 'Error: The server could not find the requested controller. Not permitted URI Characters.' );            
+            $request->addResp( 'Error: The server could not find the requested 
+                controller. Not permitted URI Characters.' );            
             $controller = 'Error';
         }       
         
@@ -46,7 +49,8 @@ class Router {
         
         if( is_readable( $controlPath ) == false ) 
         {                     
-            $request->addResp( 'Error: The server could not find the requested controller. Directory Not Readable: ' . $controlPath );
+            $request->addResp( 'Error: The server could not find the requested 
+                controller. Directory Not Readable: ' . $controlPath );
             $controlPath = $appDir .'controllers/Error.class.php';   
             $controller = 'Error';            
         }
@@ -57,7 +61,8 @@ class Router {
         {
             return new $controller( $this->registry );
         } else {
-            throw new Exception( 'Requested Controller Class does not exist:' . $controller );
+            throw new Exception( 'Requested Controller 
+                Class does not exist:' . $controller );
         }
     }
 }

@@ -1,13 +1,15 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * @version 0.3.0
- * @package Core
+ * @version 0.4.0
+ * @package DropFramework
  * @subpackage FrameworkRegistry
  * @author Joe Hallenbeck
  * 
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  * 
  */
+
+namespace Kynda\DropFramework;
 
 /**
  * Global registry of all objects substantiated in application. Needs require
@@ -41,24 +43,25 @@ class FrameworkRegistry extends Registry
      * registry then it merges the two arrays and overrights and collisions with
      * the new array.
      * 
-     * Naming convention is $array_name = file_name (no extension) unless the file is in a
-     * subdirectory of the config folder. 
+     * Naming convention is $array_name = file_name (no extension) unless the 
+     * file is in a subdirectory of the config folder. 
      * 
      * Config files stored in subdirectories of the config directory should be
-     * specified by the convention 'directory_name/file_name' whre directory_name
-     * is the array_name.
+     * specified by the convention 'directory_name/file_name' whre 
+     * directory_name is the array_name.
      * 
      * getConfig can also load files that do not specify any arrays.
      * 
      * @param string $arrName Name of the array/file to load. Array names ought
      * to be the same as the file name in the config directory.
-     * @param string $appDir Name of the application directory, if null getConfig
-     * looks for the config file in the framework root config directory.
+     * @param string $appDir Name of the application directory, if null 
+     * getConfig looks for the config file in the framework root config directory.
      * @return type 
      */
     protected function getConfig( $arrName, $appDir = null ) 
     {           
-        // If config starts with a "/" then look for the config file in the root config directory.
+        // If config starts with a "/" then look for the config file in the root 
+        // config directory.
         if( $arrName{0} == DIRECTORY_SEPARATOR )
         {
             $arrName = ltrim( $arrName, DIRECTORY_SEPARATOR);
@@ -83,15 +86,18 @@ class FrameworkRegistry extends Registry
             {                
                 include $appPath;
             } else {
-                throw new Exception('Application Directory Could Not Be Found: ' . $appPath . '<br />');
+                throw new Exception('Application Directory Could Not Be Found: ' 
+                        . $appPath . '<br />');
             }
         } else {
-            $appPath = $appDir . 'config' . DIRECTORY_SEPARATOR . $arrPath . '.php';       
+            $appPath = $appDir . 'config' . DIRECTORY_SEPARATOR . $arrPath 
+                    . '.php';       
             if( is_readable( $appPath ) ) 
             {
                 include $appPath;
             } else {
-                throw new Exception('Application Directory Could Not Be Found: ' . $appPath . '<br />');
+                throw new Exception('Application Directory Could Not Be Found: ' 
+                        . $appPath . '<br />');
             }
         }
         
@@ -111,7 +117,8 @@ class FrameworkRegistry extends Registry
             if( ! isset( $this->requests[$arrName] ) ) {
                 $this->requests[$arrName] = array();
             }
-            $this->requests[$arrName] = array_merge( $this->requests[$arrName], $$arrName );
+            $this->requests[$arrName] = 
+                    array_merge( $this->requests[$arrName], $$arrName );
         }   
     }    
     
@@ -130,17 +137,20 @@ class FrameworkRegistry extends Registry
         {
             include $this->configDir . 'autoload.php';
         } else {
-            $appPath = $appDir . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'autoload.php';
+            $appPath = $appDir . DIRECTORY_SEPARATOR . 'config' 
+                    . DIRECTORY_SEPARATOR . 'autoload.php';
             if ( is_readable ( $appPath ) ) 
             {                
                 require_once $appPath; 
             } else {
-                throw new Exception( 'The Appication directory is Not Readable: ' . $appPath . '<br />' );
+                throw new Exception( 
+                        'The Appication directory is Not Readable: ' 
+                        . $appPath . '<br />' );
             }
         }
         
-        // If successfully got the autoload.php file then loop through the arrays
-        // and load each file.
+        // If successfully got the autoload.php file then loop through the 
+        // arrays and load each file.
         if( isset( $autoload ) && is_array( $autoload ) ) 
         {
             foreach( $autoload as $directory => $files ) 
@@ -149,14 +159,17 @@ class FrameworkRegistry extends Registry
                 {
                     if( $file{0} == DIRECTORY_SEPARATOR )
                     {
-                        $fullPath = BASEPATH . $directory . DIRECTORY_SEPARATOR . ltrim( $file, DIRECTORY_SEPARATOR);
+                        $fullPath = BASEPATH . $directory . DIRECTORY_SEPARATOR 
+                                . ltrim( $file, DIRECTORY_SEPARATOR);
                     } else {
-                        $fullPath =  $path . $directory . DIRECTORY_SEPARATOR . $file;
+                        $fullPath =  $path . $directory . DIRECTORY_SEPARATOR 
+                                . $file;
                     }
                     if( is_readable( $fullPath ) ) {
                         require_once $fullPath;
                     } else {
-                        throw new Exception( 'The Full Path is Not Readable: ' . $fullPath . '<br />' );
+                        throw new Exception( 'The Full Path is Not Readable: ' 
+                                . $fullPath . '<br />' );
                     }
                 }
             }   
@@ -167,8 +180,7 @@ class FrameworkRegistry extends Registry
      * Call after loading config to get the database handle.
      */
     protected function getDbh() 
-    {   
-        //$this->dbh = new PDO('mysql:host=localhost;dbname=heyltrk_joom1', 'heyltrk', 'wn6SvYixc');
+    {           
         $this->dbh = new PDO( 
                 $this->db_dsn, 
                 $this->db_user,  
