@@ -8,24 +8,23 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
 
-namespace Kynda\DropFramework;
+namespace Kynda\DropFramework\Core;
 
 /**
- * Creates a get request object.
+ * Creates a post request object.
  */
-class Get extends Request {        
+class Post extends Request {        
     /**
-     * Grabs the get request, alternatively the get request can be overriden 
-     * with a custom request.
+     * Grabs the get request, alternatively the get request can be overriden with a custom request.
      * @param array $request Optional mock request array.
      * @return boolean true on success.
      */
     protected function init( $request = null ) {
         if( is_array( $request ) )
         {
-            $this->dirtyProperties = array_merge( $_GET, $request );
+            $this->dirtyProperties = array_merge( $_POST, $request );
         } else {
-            $this->dirtyProperties = $_GET;
+            $this->dirtyProperties = $_POST;
         }
         return true;
     }

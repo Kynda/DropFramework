@@ -7,7 +7,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
 
-namespace Kynda\DropFramework;
+namespace Kynda\DropFramework\Core;
 
 /**
  * Abstract base class for formatting a domain object pulled from the database.

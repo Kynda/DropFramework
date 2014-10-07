@@ -8,7 +8,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
 
-namespace Kynda\DropFramework;
+namespace Kynda\DropFramework\Core;
 
 /**
  * DomainObjects provide a prototype of data in object form to be used by models.

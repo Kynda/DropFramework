@@ -9,7 +9,7 @@
  * 
  */
 
-namespace Kynda\DropFramework;
+namespace Kynda\DropFramework\Core;
 
 /**
  * Global registry of all objects substantiated in application. Needs require

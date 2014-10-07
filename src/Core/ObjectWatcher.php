@@ -7,7 +7,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
 
-namespace Kynda\DropFramework;
+namespace Kynda\DropFramework\Core;
 
 /**
  * Ensures a one-to-one correlation between objects and database sources.
