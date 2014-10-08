@@ -13,7 +13,7 @@ namespace Kynda\DropFramework\Core;
 /**
  * Defines an iterator for Domain objects.
  */
-class Collection implements Iterator {
+class Collection implements \Iterator {
     /**
      * A Mapper child.
      * @var Mapper 

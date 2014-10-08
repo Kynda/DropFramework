@@ -28,9 +28,6 @@ class FrameworkRegistry extends Registry
         $this->requests['configDir'] = BASEPATH . 'config' . DIRECTORY_SEPARATOR;
         $this->getConfig( 'config' );        
         
-        // Autoload Files
-        $this->autoLoad();
-        
         // Get Database handle.
         $this->getDbh();        
     }
@@ -85,7 +82,7 @@ class FrameworkRegistry extends Registry
             {                
                 include $appPath;
             } else {
-                throw new Exception('Application Directory Could Not Be Found: ' 
+                throw new \Exception('Application Directory Could Not Be Found: ' 
                         . $appPath . '<br />');
             }
         } else {
@@ -95,7 +92,7 @@ class FrameworkRegistry extends Registry
             {
                 include $appPath;
             } else {
-                throw new Exception('Application Directory Could Not Be Found: ' 
+                throw new \Exception('Application Directory Could Not Be Found: ' 
                         . $appPath . '<br />');
             }
         }
@@ -119,68 +116,14 @@ class FrameworkRegistry extends Registry
             $this->requests[$arrName] = 
                     array_merge( $this->requests[$arrName], $$arrName );
         }   
-    }    
-    
-    /**
-     * Autoload loads the autoload.php file and all subsequent core, helper,
-     * and library files.
-     * @param string $appDir Directory of the application. 
-     */
-    protected function autoLoad( $appDir = null ) 
-    {          
-        
-        $path = BASEPATH . $appDir;        
-        
-        // If not initializing application, use default autoload.
-        if( ! $appDir ) 
-        {
-            include $this->configDir . 'autoload.php';
-        } else {
-            $appPath = $appDir . DIRECTORY_SEPARATOR . 'config' 
-                    . DIRECTORY_SEPARATOR . 'autoload.php';
-            if ( is_readable ( $appPath ) ) 
-            {                
-                require_once $appPath; 
-            } else {
-                throw new Exception( 
-                        'The Appication directory is Not Readable: ' 
-                        . $appPath . '<br />' );
-            }
-        }
-        
-        // If successfully got the autoload.php file then loop through the 
-        // arrays and load each file.
-        if( isset( $autoload ) && is_array( $autoload ) ) 
-        {
-            foreach( $autoload as $directory => $files ) 
-            {
-                foreach( $files as $file ) 
-                {
-                    if( $file{0} == DIRECTORY_SEPARATOR )
-                    {
-                        $fullPath = BASEPATH . $directory . DIRECTORY_SEPARATOR 
-                                . ltrim( $file, DIRECTORY_SEPARATOR);
-                    } else {
-                        $fullPath =  $path . $directory . DIRECTORY_SEPARATOR 
-                                . $file;
-                    }
-                    if( is_readable( $fullPath ) ) {
-                        require_once $fullPath;
-                    } else {
-                        throw new Exception( 'The Full Path is Not Readable: ' 
-                                . $fullPath . '<br />' );
-                    }
-                }
-            }   
-        }
-    }
+    }        
     
     /**
      * Call after loading config to get the database handle.
      */
     protected function getDbh() 
-    {           
-        $this->dbh = new PDO( 
+    {               
+        $this->dbh = new \PDO( 
                 $this->db_dsn, 
                 $this->db_user,  
                 $this->db_pass ) 

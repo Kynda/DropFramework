@@ -23,7 +23,7 @@ class StmtFactory
      * @param DomainObject $obj
      * @return PDOStatment 
      */
-    public function insertStmt( PDO $pdo, $table, DomainObject $obj )
+    public function insertStmt( \PDO $pdo, $table, DomainObject $obj )
     {
         $stmt = 'INSERT INTO ' . $table . ' ( ';
         $arr = $obj->getArray();
@@ -50,7 +50,7 @@ class StmtFactory
      * @param DomainObject $obj
      * @return PDOStatement 
      */
-    public function updateStmt( PDO $pdo, $table, DomainObject $obj )
+    public function updateStmt( \PDO $pdo, $table, DomainObject $obj )
     {
         $stmt = 'UPDATE ' . $table . ' SET ';
         $arr = $obj->getArray();
@@ -71,7 +71,7 @@ class StmtFactory
      * @param string $table Table Name
      * @return PDOStatement
      */
-    public function selectStmt( PDO $pdo, $table )
+    public function selectStmt( \PDO $pdo, $table )
     {
         return $pdo->prepare( 'SELECT * FROM ' . $table . ' WHERE `id`=?' );
     }
@@ -96,7 +96,7 @@ class StmtFactory
      * returned statement where 'key' will be replaced with 'value'.
      * @return PDOStatement
      */
-    public function selectAllStmt( PDO $pdo, $table, $args=null )
+    public function selectAllStmt( \PDO $pdo, $table, $args=null )
     {
         if( isset( $args['prepare'] ) )
         {
@@ -138,7 +138,7 @@ class StmtFactory
      * @param string $table The table to delete from.
      * @return PDOStatement
      */
-    public function deleteStmt( PDO $pdo, $table )
+    public function deleteStmt( \PDO $pdo, $table )
     {
         return $pdo->prepare( 'DELETE FROM ' . $table . ' WHERE `id`=?' );
     }
@@ -159,7 +159,7 @@ class StmtFactory
      * @param PDOStatement $stmt
      * @throws PDOException
      */
-    public function bindAndExecute( array $arr, PDOStatement $stmt )
+    public function bindAndExecute( array $arr, \PDOStatement $stmt )
     {
         $values = "\n";
 
@@ -176,7 +176,7 @@ class StmtFactory
         try 
         {               
             $result = $stmt->execute( );
-        } catch ( PDOException $e ) {
+        } catch ( \PDOException $e ) {
             trigger_error( $e->getMessage() . "\n\n" . $stmt->queryString . "\n" . $values );
             throw $e;
         }                

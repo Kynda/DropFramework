@@ -10,7 +10,7 @@
 
 namespace Kynda\DropFramework\Core;
 
-class UnsanitaryRequestException extends Exception {};
+class UnsanitaryRequestException extends \Exception {};
 
 /**
  * The request object is a registry object that stores a sanitized copy of the 
@@ -77,14 +77,15 @@ class Request {
         
         if( ! isset( self::$requests[$name]) )
         {
+            $class = 'Kynda\DropFramework\Core\\' . $class;
             $newRegistry = new $class( $request );
             
             // Make sure that the class specified is actually a request.
-            if( is_a( $newRegistry, 'Request' ) )
+            if( $newRegistry instanceof Request )
             {
                 self::$requests[$name] = $newRegistry;
             } else {
-                throw BadMethodCallException();
+                throw new \BadMethodCallException( "$class is not a Request");
             }
         }
         return self::$requests[$name];

@@ -80,9 +80,7 @@ class ApplicationRegistry extends FrameworkRegistry
             {
                 $this->getConfig( $file, $this->appDir );
             }     
-        }        
-        // Load application specific helpers and libraries.
-        $this->autoLoad( $this->appDir );     
+        }           
         
         // Remove ApplicationRegistry from the Registries and replace it with an 
         // instance of itself specified by it's 

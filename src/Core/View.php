@@ -10,7 +10,7 @@
 
 namespace Kynda\DropFramework\Core;
 
-class TemplateException extends Exception {}
+class TemplateException extends \Exception {}
 
 /**
  * Handles data for templates.

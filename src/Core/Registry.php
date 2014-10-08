@@ -44,18 +44,19 @@ abstract class Registry
     {
 
         if( ! isset( self::$registries[$class]) )
-        {
+        {       
+            $class = 'Kynda\DropFramework\Core\\'.$class;
             $newRegistry = new $class();
             // Make sure that the class specified is actually a registry.
-            if( is_a( $newRegistry, 'Registry' ) )
+            if( $newRegistry instanceof Registry )
             {
                 self::$registries[$class] = $newRegistry;
             } else {
-                throw BadMethodCallException();
+                throw new \BadMethodCallException();
             }
         }        
         return self::$registries[$class];
-    }    
+    }     
     
     /**
      * Sets a registry property.

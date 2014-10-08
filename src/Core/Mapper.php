@@ -10,8 +10,8 @@
 
 namespace Kynda\DropFramework\Core;
 
-class DomainIntegrityException extends Exception { }
-class TypeException extends Exception { }
+class DomainIntegrityException extends \Exception { }
+class TypeException extends \Exception { }
 
 /**
  * Provides interface between DomainObjects and database.
@@ -74,7 +74,7 @@ class Mapper {
     * @param DomainFormatter $formatter
     * @param StmtFactory $stmtFactory 
     */
-    public function __construct( PDO $dbh, 
+    public function __construct( \PDO $dbh, 
             $table, 
             DomainObject $obj, 
             DomainFormatter $formatter = null, 
@@ -83,7 +83,11 @@ class Mapper {
         self::$dbh = $dbh;
         $this->targetTable = $table;
         $this->targetDomain = get_class( $obj );
-        $this->idField = array_shift( array_keys( $obj->getArray() ) );
+        
+        $args = $obj->getArray();
+        $keys = array_keys( $args );
+        
+        $this->idField = array_shift( $keys );
         $this->formatter = $formatter;
         if( $stmtFactory != null )
         {
@@ -250,7 +254,7 @@ class Mapper {
         } catch ( PDOException $e ) {
             trigger_error( $e->getMessage() . "\n\n" . $stmt->queryString );
         }
-        return new Collection( $this, $stmt->fetchAll( PDO::FETCH_ASSOC ) );
+        return new Collection( $this, $stmt->fetchAll( \PDO::FETCH_ASSOC ) );
     }
     
     /**
