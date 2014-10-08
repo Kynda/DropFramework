@@ -15,7 +15,6 @@ namespace Kynda\DropFramework\Core;
  * Global registry of all objects substantiated in application. Needs require
  * because it runs before AutoLoad.
  */
-require_once 'Registry.class.php';
 class FrameworkRegistry extends Registry 
 {    
     /**
